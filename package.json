@@ -4,7 +4,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "start": "node server.js",
+    "build": "npm --prefix frontend run build",
+    "render-build": "npm ci && npm --prefix frontend ci && npm run build"
   },
   "keywords": [],
   "author": "",
