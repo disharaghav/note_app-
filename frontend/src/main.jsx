@@ -584,42 +584,42 @@ function App() {
                 const photo = notePhotos[Math.abs(photoIndex)]
 
                 return (
-                <article key={note._id} className="note-card" style={{ background: note.color || '#f5f3ff', '--note-index': index }}>
-                  <div className="note-photo">
-                    <img src={photo.src} alt={photo.alt} loading="lazy" />
-                    <span aria-hidden="true">✦</span>
-                  </div>
-                  <div className="note-card-top">
-                    <span className="note-tag">{note.isPinned ? 'Pinned' : (note.category || 'General')}</span>
-                    <div className="note-actions-row">
-                      {note.isPrivate && <span className="mini-lock">🔒</span>}
-                      {note.isFavorite && <span className="mini-fav">★</span>}
+                  <article key={note._id} className="note-card" style={{ background: note.color || '#f5f3ff', '--note-index': index }}>
+                    <div className="note-photo">
+                      <img src={photo.src} alt={photo.alt} loading="lazy" />
+                      <span aria-hidden="true">✦</span>
                     </div>
-                  </div>
+                    <div className="note-card-top">
+                      <span className="note-tag">{note.isPinned ? 'Pinned' : (note.category || 'General')}</span>
+                      <div className="note-actions-row">
+                        {note.isPrivate && <span className="mini-lock">🔒</span>}
+                        {note.isFavorite && <span className="mini-fav">★</span>}
+                      </div>
+                    </div>
 
-                  <h3>{note.title || 'Untitled note'}</h3>
-                  <p>{note.isPrivate ? 'This is a private note. Unlock to view content.' : (note.content || 'No content added yet.')}</p>
+                    <h3>{note.title || 'Untitled note'}</h3>
+                    <p>{note.isPrivate ? 'This is a private note. Unlock to view content.' : (note.content || 'No content added yet.')}</p>
 
-                  <div className="meta-row">
-                    <span>{note.category || 'General'}</span>
-                    <span>{note.isPrivate ? 'Private' : 'Public'}</span>
-                  </div>
+                    <div className="meta-row">
+                      <span>{note.category || 'General'}</span>
+                      <span>{note.isPrivate ? 'Private' : 'Public'}</span>
+                    </div>
 
-                  <div className="card-actions">
-                    <button type="button" className="mini-btn" onClick={() => handleOpenNote(note)}>{note.isPrivate ? 'Unlock' : 'Open'}</button>
-                    <button type="button" className="mini-btn" onClick={() => openEditNote(note)}>Edit</button>
-                    <button type="button" className="mini-btn" onClick={() => handleToggleFavorite(note._id, note.isFavorite)}>{note.isFavorite ? 'Unfavorite' : 'Favorite'}</button>
-                    <button type="button" className="mini-btn" onClick={() => handleMoveToStatus(note._id, note.status === 'archive' ? 'inbox' : 'archive')}>{note.status === 'archive' ? 'Restore' : 'Archive'}</button>
-                    <button type="button" className="mini-btn danger" onClick={() => handleMoveToStatus(note._id, 'trash')}>Trash</button>
-                  </div>
+                    <div className="card-actions">
+                      <button type="button" className="mini-btn" onClick={() => handleOpenNote(note)}>{note.isPrivate ? 'Unlock' : 'Open'}</button>
+                      <button type="button" className="mini-btn" onClick={() => openEditNote(note)}>Edit</button>
+                      <button type="button" className="mini-btn" onClick={() => handleToggleFavorite(note._id, note.isFavorite)}>{note.isFavorite ? 'Unfavorite' : 'Favorite'}</button>
+                      <button type="button" className="mini-btn" onClick={() => handleMoveToStatus(note._id, note.status === 'archive' ? 'inbox' : 'archive')}>{note.status === 'archive' ? 'Restore' : 'Archive'}</button>
+                      <button type="button" className="mini-btn danger" onClick={() => handleMoveToStatus(note._id, 'trash')}>Trash</button>
+                    </div>
 
-                  <small>
-                    {new Date(note.updatedAt || note.createdAt || Date.now()).toLocaleString([], {
-                      dateStyle: 'medium',
-                      timeStyle: 'short'
-                    })}
-                  </small>
-                </article>
+                    <small>
+                      {new Date(note.updatedAt || note.createdAt || Date.now()).toLocaleString([], {
+                        dateStyle: 'medium',
+                        timeStyle: 'short'
+                      })}
+                    </small>
+                  </article>
                 )
               })
             )}

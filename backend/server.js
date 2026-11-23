@@ -7,7 +7,7 @@ const { auth } = require("./middlewere/auth.middlewere");
 
 const app = express();
 app.use(express.json());
-const frontendBuildPath = path.join(__dirname, "frontend", "dist");
+const frontendBuildPath = path.join(__dirname, "..", "frontend", "dist");
 app.use(express.static(frontendBuildPath));
 
 app.use("/user", userRouter);
