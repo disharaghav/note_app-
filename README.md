@@ -36,6 +36,16 @@ Open the Vite URL shown in the terminal, usually `http://localhost:5173`.
 
 The Vite proxy forwards API requests to `http://localhost:8080`.
 
+## Connect Vercel frontend to Render API
+
+The backend allows the deployed Vercel origin `https://dex-lime-eight.vercel.app`.
+In the Render web service settings, set `FRONTEND_ORIGIN` to
+`https://dex-lime-eight.vercel.app`. In the Vercel project settings, add
+`VITE_API_URL` with the public URL of your Render web service (for example,
+`https://your-service.onrender.com`) and redeploy the frontend. Update the
+`FRONTEND_ORIGIN` allowlist if you add another frontend domain. Example files are
+provided in `backend/.env.example` and `frontend/.env.example`.
+
 ## Deploy on Render
 
 Create a Node web service for this repository and branch. Set the build command

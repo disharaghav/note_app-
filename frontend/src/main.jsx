@@ -2,6 +2,9 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles.css'
 
+const API_BASE_URL = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '')
+const apiUrl = (path) => `${API_BASE_URL}${path}`
+
 const initialForm = { name: '', email: '', password: '' }
 const noteColors = ['#f5f3ff', '#fef3c7', '#dcfce7', '#dbeafe', '#fee2e2', '#fce7f3']
 const noteCategories = ['General', 'Work', 'Ideas', 'Personal', 'Study', 'Quick']
@@ -99,7 +102,7 @@ function App() {
     setUser(nextUser)
 
     try {
-      const dashboardResponse = await fetch('/dashboard', {
+      const dashboardResponse = await fetch(apiUrl('/dashboard'), {
         headers: { Authorization: `Bearer ${nextToken}` }
       })
 
@@ -110,7 +113,7 @@ function App() {
         }
       }
 
-      const notesResponse = await fetch(`/user/notes?filter=${activeFilter || 'inbox'}`, {
+      const notesResponse = await fetch(apiUrl(`/user/notes?filter=${activeFilter || 'inbox'}`), {
         headers: { Authorization: `Bearer ${nextToken}` }
       })
 
@@ -136,7 +139,7 @@ function App() {
         ? form
         : { email: form.email, password: form.password }
 
-      const response = await fetch(endpoint, {
+      const response = await fetch(apiUrl(endpoint), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -167,7 +170,7 @@ function App() {
 
   const loadDashboard = async () => {
     try {
-      const response = await fetch('/dashboard', {
+      const response = await fetch(apiUrl('/dashboard'), {
         headers: { Authorization: `Bearer ${token}` }
       })
 
@@ -186,7 +189,7 @@ function App() {
 
   const loadNotes = async (filter = activeFilter) => {
     try {
-      const response = await fetch(`/user/notes?filter=${filter}`, {
+      const response = await fetch(apiUrl(`/user/notes?filter=${filter}`), {
         headers: { Authorization: `Bearer ${token}` }
       })
 
@@ -234,7 +237,7 @@ function App() {
       let data
 
       if (editingNoteId) {
-        response = await fetch(`/user/notes/${editingNoteId}`, {
+        response = await fetch(apiUrl(`/user/notes/${editingNoteId}`), {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -253,7 +256,7 @@ function App() {
         setSelectedNote((current) => (current && current._id === editingNoteId ? data : current))
         setMessage('Note updated successfully')
       } else {
-        response = await fetch('/user/notes', {
+        response = await fetch(apiUrl('/user/notes'), {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -283,7 +286,7 @@ function App() {
 
   const updateNote = async (noteId, updates) => {
     try {
-      const response = await fetch(`/user/notes/${noteId}`, {
+      const response = await fetch(apiUrl(`/user/notes/${noteId}`), {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -337,7 +340,7 @@ function App() {
     }
 
     try {
-      const response = await fetch(`/user/notes/${noteToUnlock._id}/open`, {
+      const response = await fetch(apiUrl(`/user/notes/${noteToUnlock._id}/open`), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -363,7 +366,7 @@ function App() {
 
   const handleDeleteNote = async (noteId) => {
     try {
-      const response = await fetch(`/user/notes/${noteId}`, {
+      const response = await fetch(apiUrl(`/user/notes/${noteId}`), {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` }
       })
