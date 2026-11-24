@@ -41,8 +41,8 @@ The Vite proxy forwards API requests to `http://localhost:8080`.
 The backend allows the deployed Vercel origin `https://dex-lime-eight.vercel.app`.
 In the Render web service settings, set `FRONTEND_ORIGIN` to
 `https://dex-lime-eight.vercel.app`. In the Vercel project settings, add
-`VITE_API_URL` with the public URL of your Render web service (for example,
-`https://your-service.onrender.com`) and redeploy the frontend. Update the
+`VITE_API_URL` with `https://note-app-qxpj.onrender.com` and redeploy the frontend
+if you want to override the production default. Update the
 `FRONTEND_ORIGIN` allowlist if you add another frontend domain. Example files are
 provided in `backend/.env.example` and `frontend/.env.example`.
 

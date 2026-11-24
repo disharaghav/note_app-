@@ -2,7 +2,8 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles.css'
 
-const API_BASE_URL = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '')
+const DEFAULT_API_URL = import.meta.env.DEV ? '' : 'https://note-app-qxpj.onrender.com'
+const API_BASE_URL = (import.meta.env.VITE_API_URL || DEFAULT_API_URL).replace(/\/+$/, '')
 const apiUrl = (path) => `${API_BASE_URL}${path}`
 
 const initialForm = { name: '', email: '', password: '' }
