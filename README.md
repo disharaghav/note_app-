@@ -36,15 +36,12 @@ Open the Vite URL shown in the terminal, usually `http://localhost:5173`.
 
 The Vite proxy forwards API requests to `http://localhost:8080`.
 
-## Connect Vercel frontend to Render API
+## Connect the hosted frontend and API
 
-The backend allows the deployed Vercel origin `https://dex-lime-eight.vercel.app`.
-In the Render web service settings, set `FRONTEND_ORIGIN` to
-`https://dex-lime-eight.vercel.app`. In the Vercel project settings, add
-`VITE_API_URL` with `https://note-app-qxpj.onrender.com` and redeploy the frontend
-if you want to override the production default. Update the
-`FRONTEND_ORIGIN` allowlist if you add another frontend domain. Example files are
-provided in `backend/.env.example` and `frontend/.env.example`.
+In the backend hosting settings, set `FRONTEND_ORIGIN` to your deployed frontend
+origin. In the frontend hosting settings, set `VITE_API_URL` to your backend's
+public service URL and redeploy the frontend. The production frontend has a
+default API URL in its source; use `VITE_API_URL` to override it when needed.
 
 ## Deploy on Render
 
@@ -54,4 +51,3 @@ to `npm --prefix backend run render-build` and the start command to
 `MONGODB_URI` in the service's environment variables to connect a MongoDB
 database. The Express server serves the built frontend and API from one service;
 Render provides the service port through `PORT`.
-# note_app-
